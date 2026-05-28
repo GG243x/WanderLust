@@ -140,8 +140,8 @@
       <div class="card-body">
         <p class="card-text">
           <b><%= listing.title %></b> <br>
-          &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "0" %> / night
-          <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+          <span class="base-price">&#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "0" %> / night</span>
+          <span class="tax-price" style="display: none;">&#8377;<%= listing.price ? (listing.price * 1.18).toLocaleString("en-IN") : "0" %> / night <i style="font-weight: 300; font-size: 0.85rem; color: #717171;">(incl. 18% GST)</i></span>
         </p>
       </div>
     </div>
@@ -152,13 +152,16 @@
 <script>
   let taxSwitch = document.getElementById("flexSwitchCheckDefault");
   taxSwitch.addEventListener("click", ()=>{
-    let taxInfo = document.getElementsByClassName("tax-info");
-    for(info of taxInfo) {
-      if(info.style.display != "inline"){
-        info.style.display = "inline";
+    let basePrices = document.getElementsByClassName("base-price");
+    let taxPrices = document.getElementsByClassName("tax-price");
+    for(let i = 0; i < basePrices.length; i++) {
+      if(basePrices[i].style.display !== "none"){
+        basePrices[i].style.display = "none";
+        taxPrices[i].style.display = "inline";
       }
       else{
-        info.style.display = "none";
+        basePrices[i].style.display = "inline";
+        taxPrices[i].style.display = "none";
       }
     }
   });

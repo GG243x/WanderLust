@@ -1,30 +1,101 @@
 <style>
-  .search-btn:hover{
-    background-color: #fe424d;
+  .navbar {
+    background-color: #ffffff !important;
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+    height: auto !important;
+    padding: 0.75rem 1rem !important;
+  }
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #fe424d !important;
+    transition: transform 0.2s ease;
+  }
+  .navbar-brand:hover {
+    transform: scale(1.02);
+  }
+  .navbar-brand i {
+    font-size: 1.8rem;
+    color: #fe424d;
+  }
+  .nav-link {
+    color: #222222 !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px;
+    transition: all 0.2s ease !important;
+  }
+  .nav-link:hover {
+    color: #fe424d !important;
+    background-color: #f7f7f7;
+  }
+  .search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dddddd;
+    border-radius: 40px;
+    padding: 0.25rem 0.25rem 0.25rem 1.25rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s ease;
+    background-color: #fff;
+  }
+  .search-container:hover {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .search-inp {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 0.9rem;
+    padding: 0 0.5rem 0 0 !important;
+    width: 220px;
+    background: transparent !important;
+  }
+  .search-inp::placeholder {
+    color: #717171;
+    opacity: 0.8;
   }
   .search-btn {
     background-color: #fe424d;
     color: white !important;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    padding: 0;
+  }
+  .search-btn:hover {
+    background-color: #d92b37;
   }
   .search-btn i {
-    margin-right: 0.25rem;
-    display: inline !important;
+    font-size: 0.85rem;
+    margin: 0 !important;
   }
-  .search-inp {
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+  
+  @media (max-width: 767.98px) {
+    .search-container {
+      margin: 0.75rem 0;
+      width: 100%;
+    }
+    .search-inp {
+      width: 100%;
+    }
   }
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass"></i>
+      <span class="d-none d-sm-inline">WanderLust</span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,31 +103,33 @@
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
-    </div>
 
-  <!-- Search Bar: Submits a GET request to /listings with query parameter "q" -->
-  <div class="navbar-nav flex-grow-1 justify-content-center">
-  <form class="d-flex" role="search" action="/listings" method="GET">
-    <input
-      class="form-control me-2 search-inp"
-      type="search"
-      placeholder="Search destinations"
-      name="q" 
-    />
-    <button class="btn search-btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i>
-      Search
-    </button>
-  </form>
-  </div>
-
-    <div class="navbar-nav ms-auto">
-      <a class="nav-link" href="/listings/new">Airbnb your home</a>
-      <% if(!currUser) { %>
-        <a class="nav-link " href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
-      <% } else { %>
-        <a class="nav-link" href="/logout"><b>Log out</b></a>
-      <% } %>
+      <!-- Search Bar: Submits a GET request to /listings with query parameter "q" -->
+      <div class="navbar-nav ms-auto me-auto">
+        <form class="d-flex" role="search" action="/listings" method="GET">
+          <div class="search-container">
+            <input
+              class="form-control search-inp"
+              type="search"
+              placeholder="Search destinations"
+              name="q" 
+            />
+            <button class="search-btn" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
       </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% if(!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } else { %>
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
+        <% } %>
+      </div>
+    </div>
   </div>
 </nav>
