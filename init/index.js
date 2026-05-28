@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const initData = require('./data.js');
 const Listing = require('../models/listing.js');
 const User = require('../models/user.js');
+const Review = require('../models/review.js');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const path = require('path');
 
@@ -30,8 +31,9 @@ async function main() {
 // initDB clears existing database listings, creates a default owner user if not present,
 // and imports sample listings while fetching dynamic map coordinates for each listing.
 const initDB = async () => {
-    // 1. Delete all existing listings to start with a fresh slate
+    // 1. Delete all existing listings and reviews to start with a fresh slate
     await Listing.deleteMany({});
+    await Review.deleteMany({});
     
     // 2. Find or register a default "admin" owner user to assign to the sample listings.
     // This prevents "Cannot read properties of null (reading 'username')" crashes when listing details are shown.

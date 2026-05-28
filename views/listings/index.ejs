@@ -3,8 +3,13 @@
   <style>
     #filters {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
       align-items: center;
+      scrollbar-width: none; /* Firefox */
+    }
+    #filters::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
     .filter {
       text-align: center;
@@ -12,6 +17,7 @@
       margin-top: 2rem;
       opacity: 0.7;
       transition: opacity 0.2s; /* smooth transition on hover */
+      flex-shrink: 0;
     }
     .filter:hover{
       opacity: 1;
@@ -32,8 +38,10 @@
       height: 3.25rem;
       padding: 1rem;
       margin-left: 2rem;
+      margin-top: 2rem;
       display: flex;
       align-items: center;
+      flex-shrink: 0;
     }
 
     /* Style for filter links so they don't look like standard links */
@@ -137,8 +145,8 @@
         </p>
       </div>
     </div>
-    <% } %>
   </a>
+  <% } %>
   </div>
 
 <script>
